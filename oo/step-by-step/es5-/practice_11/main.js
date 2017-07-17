@@ -1,10 +1,30 @@
-/**
- * Created by yunfeiyang on 17-7-14.
- */
+
 "use strict"
 class Class{
     constructor(number){
         this.number=number;
+        this.student=[];
+    }
+    assignLeader(student) {
+        if (this.isIn(student)) {
+            console.log('It is not one of us');
+        } else {
+            this.leader = student.id;
+            for (let teacher of this.teachers) {
+                teacher.informLeader(this, student);
+            }
+        }
+
+    }
+    appendMember(student) {
+        student.klass = this;
+        this.students.push(student);
+        for (let teacher of this.teachers) {
+            teacher.informJoin(this, student);
+        }
+    }
+    isIn(student) {
+        return student.klass.number == this.number;
     }
 }
 class Person{
@@ -38,7 +58,14 @@ class Teacher extends Person{
             return super.introduce()+`I am a Teacher. I teach Class ${this.Class}.`;
         }
     }
-    introduceWith(Student){
-
+    isTeaching(student) {
+        let result = false;
+        for (let klass of this.classes) {
+            if (klass.isIn(student)) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 }

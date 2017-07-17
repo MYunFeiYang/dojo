@@ -14,13 +14,18 @@ class Class{
                 teacher.informLeader(this, student);
             }
         }
+
     }
-    introduce(){
-        var student=new Student();
-        if (student.id==2){
-            return `My name is ${student.name}. I am ${student.age} years old. I am a Student. I am Leader of Class ${student.Class}.`;
+    appendMember(student) {
+        student.klass = this;
+        this.students.push(student);
+        for (let teacher of this.teachers) {
+            teacher.informJoin(this, student);
         }
-}
+    }
+    isIn(student) {
+        return student.klass.number == this.number;
+    }
 }
 class Person{
     constructor(id,name,age){
