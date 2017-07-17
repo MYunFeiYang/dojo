@@ -1,11 +1,26 @@
-/**
- * Created by yunfeiyang on 17-7-14.
- */
+
 "use strict"
 class Class{
     constructor(number){
         this.number=number;
+        this.student=[];
     }
+    assignLeader(student) {
+        if (this.isIn(student)) {
+            console.log('It is not one of us');
+        } else {
+            this.leader = student.id;
+            for (let teacher of this.teachers) {
+                teacher.informLeader(this, student);
+            }
+        }
+    }
+    introduce(){
+        var student=new Student();
+        if (student.id==2){
+            return `My name is ${student.name}. I am ${student.age} years old. I am a Student. I am Leader of Class ${student.Class}.`;
+        }
+}
 }
 class Person{
     constructor(id,name,age){
